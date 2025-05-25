@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>HattersGroup - Hacking Site</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <style>
+    /* Reset base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #ddd;
+      overflow-x: hidden;
+      background-color: #121212; /* fallback if image missing */
+    }
+
+    /* Overlay scuro sopra lo sfondo */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(18,18,18,0.85);
+      z-index: -1;
+    }
+
+    header {
+      padding: 60px 20px;
+      text-align: center;
+      background: transparent;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #333;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: #33ff99;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px #33ff99aa;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #aaa;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* Sezioni di contenuto */
+    section {
+      max-width: 900px;
+      margin: 80px auto;
+      background: rgba(25, 25, 25, 0.7);
+      border-radius: 12px;
+      padding: 40px 30px;
+      box-shadow: 0 0 15px #22cc88aa;
+      color: #ddd;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.7s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      color: #33ff99;
+      margin-bottom: 20px;
+      text-shadow: 0 0 6px #33ff9955;
+    }
+
+    p {
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+
+    /* Animazione glow */
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 6px #33ff99aa, 0 0 12px #33ff99cc;
+      }
+      100% {
+        text-shadow: 0 0 16px #33ff99ff, 0 0 30px #33ff99ff;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>HattersGroup</h1>
+  <p>Il portale dedicato all'hacking etico e alla sicurezza informatica</p>
+</header>
+
+<section id="intro">
+  <h2>Benvenuto nel nostro sito di hacking</h2>
+  <p>
+    Qui potrai trovare risorse, tutorial e sfide di hacking realistiche per affinare le tue abilità.
+    Il nostro obiettivo è educare e promuovere un hacking responsabile e consapevole.
+  </p>
+</section>
+
+<section id="features">
+  <h2>Caratteristiche del sito</h2>
+  <ul>
+    <li>Tutorial dettagliati e aggiornati</li>
+    <li>Missioni realistiche per mettere alla prova le tue competenze</li>
+    <li>Community di hacker etici pronti a supportarti</li>
+    <li>Eventi e workshop online</li>
+  </ul>
+</section>
+
+<script>
+  // Animazione sezione al scroll: aggiunge classe .visible quando la sezione è visibile
+  function revealOnScroll() {
+    const sections = document.querySelectorAll('section');
+    const windowHeight = window.innerHeight;
+
+    sections.forEach(section => {
+      const top = section.getBoundingClientRect().top;
+      if (top < windowHeight - 100) {
+        section.classList.add('visible');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+</script>
+
+</body>
+</html>
