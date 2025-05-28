@@ -23,7 +23,7 @@
       background-size: cover;
       color: #ddd;
       overflow-x: hidden;
-      background-color: #121212; /* fallback if image missing */
+      background-color: #121212; /* fallback */
     }
 
     /* Overlay scuro sopra lo sfondo */
@@ -88,9 +88,13 @@
       text-shadow: 0 0 6px #33ff9955;
     }
 
-    p {
+    p, ul {
       line-height: 1.6;
       font-size: 1.1rem;
+    }
+
+    ul {
+      padding-left: 1.3rem;
     }
 
     /* Animazione glow */
@@ -103,35 +107,152 @@
       }
     }
 
+    /* --- MENU 3 PUNTINI IN ALTO DESTRA --- */
+
+    .menu-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      user-select: none;
+      color: #33ff99;
+      background: transparent;
+      border: none;
+      z-index: 150;
+      transition: color 0.3s ease;
+    }
+    .menu-button:hover {
+      color: #66ffbb;
+    }
+
+    .menu-table-container {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      width: 0;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.85);
+      border-radius: 8px;
+      box-shadow: 0 0 15px #33ff99aa;
+      transition: width 0.5s ease;
+      z-index: 140;
+    }
+
+    .menu-table-container.active {
+      width: 320px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #33ff99;
+      font-family: monospace;
+    }
+
+    th, td {
+      padding: 10px 15px;
+      border-bottom: 1px solid #22cc8877;
+      text-align: left;
+    }
+
+    th {
+      background: #111;
+    }
+
+    /* --- BOTTONE SWITCH LINGUA IN ALTO A SINISTRA --- */
+    .lang-switch {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: transparent;
+      border: 2px solid #33ff99;
+      border-radius: 8px;
+      color: #33ff99;
+      font-weight: bold;
+      font-family: monospace;
+      padding: 6px 14px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      z-index: 160;
+    }
+    .lang-switch:hover {
+      background-color: #33ff99;
+      color: #121212;
+    }
+
   </style>
 </head>
 <body>
 
 <header>
-  <h1>HattersGroup</h1>
-  <p>Il portale dedicato all'hacking etico e alla sicurezza informatica</p>
+  <h1 data-it="HattersGroup" data-en="HattersGroup">HattersGroup</h1>
+  <p data-it="Il portale dedicato all'hacking etico e alla sicurezza informatica"
+     data-en="The portal dedicated to ethical hacking and cybersecurity">
+    Il portale dedicato all'hacking etico e alla sicurezza informatica
+  </p>
 </header>
 
 <section id="intro">
-  <h2>Benvenuto nel nostro sito di hacking</h2>
-  <p>
+  <h2 data-it="Benvenuto nel nostro sito di hacking" data-en="Welcome to our hacking site">
+    Benvenuto nel nostro sito di hacking
+  </h2>
+  <p data-it="Qui potrai trovare risorse, tutorial e sfide di hacking realistiche per affinare le tue abilità. Il nostro obiettivo è educare e promuovere un hacking responsabile e consapevole."
+     data-en="Here you can find resources, tutorials and realistic hacking challenges to sharpen your skills. Our goal is to educate and promote responsible and aware hacking.">
     Qui potrai trovare risorse, tutorial e sfide di hacking realistiche per affinare le tue abilità.
     Il nostro obiettivo è educare e promuovere un hacking responsabile e consapevole.
   </p>
 </section>
 
 <section id="features">
-  <h2>Caratteristiche del sito</h2>
+  <h2 data-it="Caratteristiche del sito" data-en="Site Features">Caratteristiche del sito</h2>
   <ul>
-    <li>Tutorial dettagliati e aggiornati</li>
-    <li>Missioni realistiche per mettere alla prova le tue competenze</li>
-    <li>Community di hacker etici pronti a supportarti</li>
-    <li>Eventi e workshop online</li>
+    <li data-it="Tutorial dettagliati e aggiornati" data-en="Detailed and updated tutorials">Tutorial dettagliati e aggiornati</li>
+    <li data-it="Missioni realistiche per mettere alla prova le tue competenze" data-en="Realistic missions to test your skills">Missioni realistiche per mettere alla prova le tue competenze</li>
+    <li data-it="Community di hacker etici pronti a supportarti" data-en="Community of ethical hackers ready to support you">Community di hacker etici pronti a supportarti</li>
+    <li data-it="Eventi e workshop online" data-en="Online events and workshops">Eventi e workshop online</li>
   </ul>
 </section>
 
+<!-- Bottone 3 puntini -->
+<button class="menu-button" aria-label="Apri menu">⋮</button>
+
+<!-- Contenitore tabella -->
+<div class="menu-table-container" aria-hidden="true">
+  <table>
+    <thead>
+      <tr>
+        <th data-it="Comando" data-en="Command">Comando</th>
+        <th data-it="Descrizione" data-en="Description">Descrizione</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-it="ls" data-en="ls">ls</td>
+        <td data-it="Lista directory" data-en="List directories">Lista directory</td>
+      </tr>
+      <tr>
+        <td data-it="cd" data-en="cd">cd</td>
+        <td data-it="Cambia directory" data-en="Change directory">Cambia directory</td>
+      </tr>
+      <tr>
+        <td data-it="cat" data-en="cat">cat</td>
+        <td data-it="Mostra contenuto file" data-en="Show file content">Mostra contenuto file</td>
+      </tr>
+      <tr>
+        <td data-it="hack" data-en="hack">hack</td>
+        <td data-it="Avvia attacco simulato" data-en="Start simulated attack">Avvia attacco simulato</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Switch lingua -->
+<button class="lang-switch" aria-label="Switch language">IT / EN</button>
+
 <script>
-  // Animazione sezione al scroll: aggiunge classe .visible quando la sezione è visibile
+  // Animazione sezioni al scroll
   function revealOnScroll() {
     const sections = document.querySelectorAll('section');
     const windowHeight = window.innerHeight;
@@ -146,7 +267,19 @@
 
   window.addEventListener('scroll', revealOnScroll);
   window.addEventListener('load', revealOnScroll);
-</script>
 
-</body>
-</html>
+  // Toggle menu tabella
+  const btn = document.querySelector('.menu-button');
+  const container = document.querySelector('.menu-table-container');
+
+  btn.addEventListener('click', () => {
+    const active = container.classList.toggle('active');
+    container.setAttribute('aria-hidden', !active);
+  });
+
+  // Switch lingua
+  const langBtn = document.querySelector('.lang-switch');
+  let currentLang = 'it'; // default
+
+  langBtn.addEventListener('click', () => {
+    currentLang =
