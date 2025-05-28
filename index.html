@@ -7,21 +7,18 @@
   <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="style.css">
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      background: #0a0a0a;
-      color: #fff;
+      padding: 0;
+    }
+
+    body {
       font-family: 'Courier New', monospace;
-    }
-
-    #real-site, #error-404 {
-      display: none;
-      padding: 2rem;
-    }
-
-    h1 {
-      font-size: 2rem;
-      margin-top: 2rem;
+      background: #000 url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      overflow-x: hidden;
     }
 
     .popup {
@@ -47,33 +44,93 @@
       margin-top: 1rem;
     }
 
-    .popup label {
+    #real-site {
+      display: none;
+      animation: fadeIn 1.5s ease forwards;
+      padding: 2rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .lang-switch {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    .lang-switch button {
+      margin: 5px;
+      padding: 5px 10px;
+      background: #111;
+      color: #0f0;
+      border: 1px solid #0f0;
+      cursor: pointer;
+    }
+
+    .menu {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+    }
+
+    .dots {
+      cursor: pointer;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: white;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      margin-top: 10px;
+      background-color: rgba(0,0,0,0.85);
+      border: 1px solid #0f0;
+      border-radius: 5px;
+      padding: 10px;
+      animation: slideIn 0.5s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .dropdown ul {
+      list-style: none;
+    }
+
+    .dropdown li {
+      margin: 5px 0;
+      color: #0f0;
+    }
+
+    h1 {
+      margin-top: 2rem;
+      font-size: 2.5rem;
+    }
+
+    p, ul {
       font-size: 1.2rem;
+      margin-top: 1rem;
     }
 
-    /* 404 style */
-    .bsod h1 {
-      color: #0414a7;
-      background: #aaa;
-      display: inline-block;
-      padding: 0 15px;
+    .hidden {
+      display: none;
     }
 
-    .bsod p {
-      font-size: 1.2rem;
-      margin: 1rem 0;
-    }
-
-    .bsod a {
-      color: #aaa;
-      text-decoration: none;
-      margin: 0 0.5rem;
-    }
-
-    .bsod a:hover {
-      background: #aaa;
-      color: #0414a7;
-      padding: 0 5px;
+    #error-404 {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      font-family: 'VT323', monospace;
+      background-color: #0414a7;
+      color: #e0e2f4;
     }
   </style>
 </head>
@@ -85,18 +142,36 @@
 </div>
 
 <div id="real-site">
-  <h1>HattersGroup</h1>
-  <p>The portal for ethical hacking</p>
-  <p>Welcome to our site. Tutorials, tools and scripts for ethical hacking enthusiasts.</p>
+  <div class="lang-switch">
+    <button onclick="switchLang('en')">EN</button>
+    <button onclick="switchLang('it')">IT</button>
+  </div>
+
+  <div class="menu">
+    <button class="dots" onclick="toggleMenu()">⋮</button>
+    <div class="dropdown" id="dropdown">
+      <ul>
+        <li>Social</li>
+        <li>Tools</li>
+        <li>Scripts</li>
+      </ul>
+    </div>
+  </div>
+
+  <h1 data-en="HattersGroup" data-it="HattersGroup">HattersGroup</h1>
+  <p data-en="The portal for ethical hacking" data-it="Il portale per l'hacking etico">The portal for ethical hacking</p>
+  <p data-en="Welcome to our site. Tutorials, tools and scripts for ethical hacking enthusiasts." data-it="Benvenuto nel nostro sito. Tutorial, strumenti e script per appassionati di hacking etico.">
+    Welcome to our site. Tutorials, tools and scripts for ethical hacking enthusiasts.
+  </p>
   <ul>
-    <li>✔️ Detailed guides</li>
-    <li>🛠️ Open source tools</li>
-    <li>💾 Useful scripts</li>
-    <li>🌍 Free access</li>
+    <li data-en="✔️ Detailed guides" data-it="✔️ Guide dettagliate">✔️ Detailed guides</li>
+    <li data-en="🛠️ Open source tools" data-it="🛠️ Strumenti open source">🛠️ Open source tools</li>
+    <li data-en="💾 Useful scripts" data-it="💾 Script utili">💾 Useful scripts</li>
+    <li data-en="🌍 Free access" data-it="🌍 Accesso gratuito">🌍 Free access</li>
   </ul>
 </div>
 
-<div id="error-404" class="bsod">
+<div id="error-404">
   <h1>Error - 404</h1>
   <p>An error has occurred, to continue:</p>
   <p>* Return to our homepage.<br>* Send us an e-mail about this error and try later.</p>
@@ -118,6 +193,17 @@
       }
     }
   });
+
+  function toggleMenu() {
+    const dropdown = document.getElementById('dropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function switchLang(lang) {
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.textContent = el.getAttribute('data-' + lang);
+    });
+  }
 </script>
 
 </body>
